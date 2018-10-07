@@ -122,7 +122,7 @@ static dht_ret_code_t dht__data_transmission_seq(dht_sensor_t * p_dht_sensor)
     p_dht_sensor->temp_celsius = received_bytes[2];
     p_dht_sensor->temp_farenheit = p_dht_sensor->temp_celsius * 1.8 + 32;
     
-    uint16_t sum = (received_bytes[0] + received_bytes[1] + 
+    uint8_t sum = (received_bytes[0] + received_bytes[1] + 
         received_bytes[2] + received_bytes[3]) & 0xFF;
 
     if(received_bytes[4] != sum)
@@ -136,7 +136,7 @@ static dht_ret_code_t dht__data_transmission_seq(dht_sensor_t * p_dht_sensor)
 
 }
 
-static dht_ret_code_t dht__transmission_loop(uint8_t timeout_limit, uint8_t pin_level, uint8_t *p_delay_counter)
+static dht_ret_code_t dht__transmission_loop(uint8_t timeout_limit, uint8_t pin_level, uint8_t * p_delay_counter)
 {
     while(dht__data_level() == pin_level)
     {
